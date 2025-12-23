@@ -1,0 +1,8 @@
+2025-02-05T14:00:12 INFO Request received from 192.168.1.10
+2025-02-05T14:00:13 ERROR NullPointerException at LogService.java:42
+2025-02-05T14:00:14 WARN Response time exceeded threshold
+2025-02-05T14:00:15 INFO Request completed in 120ms
+2025-02-05T14:00:20 ERROR Timeout while calling external API
+2025-02-05T14:00:25 INFO Health check passed
+2025-02-05T14:00:13 ERROR NullPointerException at LogService.java:42
+2025-02-05T14:00:13 ERROR NullPointerException at LogService.java:42
