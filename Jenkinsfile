@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -11,32 +10,32 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t loganalyzer .'
+                bat 'docker build -t loganalyzer .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8080:8080 --name loganalyzer-container loganalyzer'
+                bat 'docker run -d -p 8080:8080 --name loganalyzer-container loganalyzer'
             }
         }
     }
 
     post {
         always {
-            sh 'docker rm -f loganalyzer-container || true'
+            bat 'docker rm -f loganalyzer-container || exit 0'
         }
     }
 }
