@@ -26,16 +26,17 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Stop Old Container') {
+            steps {
+                bat 'docker stop loganalyzer-container || exit 0'
+                bat 'docker rm loganalyzer-container || exit 0'
+            }
+        }
+
+        stage('Run New Container') {
             steps {
                 bat 'docker run -d -p 8080:8080 --name loganalyzer-container loganalyzer'
             }
-        }
-    }
-
-    post {
-        always {
-            bat 'docker rm -f loganalyzer-container || exit 0'
         }
     }
 }
