@@ -38,5 +38,17 @@ pipeline {
                 bat 'docker run -d -p 8080:8080 --name loganalyzer-container loganalyzer'
             }
         }
+
+        stage('API Test') {
+            steps {
+                bat 'curl -X POST http://localhost:8080/validatelogsapi/logs/analyze -H "Content-Type: text/plain" -d "2024-12-21T10:00:00 ERROR Something broke"'
+            }
+        }
+
+        stage('File Upload Test') {
+            steps {
+                bat 'curl -X POST http://localhost:8080/validatelogsapi/logs/upload -F "file=@logs.txt"'
+            }
+        }
     }
 }
